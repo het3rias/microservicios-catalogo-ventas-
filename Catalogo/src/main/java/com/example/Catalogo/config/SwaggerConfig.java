@@ -15,6 +15,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("API 2026 - Catalogo")
                         .version("1.0")
-                        .description("Documentación de la API de Catalogo"));
+                        .description("Documentación de la API de Catalogo "));
     }
 }
