@@ -1,14 +1,15 @@
 package com.example.Catalogo.service;
 
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.Catalogo.exception.BadRequestException;
 import com.example.Catalogo.exception.ResourceNotFoundException;
 import com.example.Catalogo.model.Libro;
 import com.example.Catalogo.repository.LibroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class LibroService {
@@ -25,6 +26,11 @@ public class LibroService {
                 .orElseThrow(() -> new ResourceNotFoundException("Libro con id " + id + " no encontrado"));
     }
 
+    public void eliminarLibro(Integer id) {
+        if (!libroRepository.existsById(id))
+            throw new ResourceNotFoundException("Libro con id " + id + " no encontrado");
+        libroRepository.deleteById(id);
+    }
 
     public List<Libro> filtrarPorCategoria(Integer idCategoria) {
         List<Libro> resultado = libroRepository.findByCategoria_Id(idCategoria);
